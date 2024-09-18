@@ -1,13 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework</title>
-    <script src="./js/task-1.js" defer></script>
-    <script src="./js/task-2.js" defer></script>
-    <script src="./js/task-3.js" defer></script>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кнопки з лічильником</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #007bff; /* Синій фон */
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .counter-container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .counter {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+      }
+
+      .button {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background-color: #28a745;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .button:hover {
+        background-color: #218838;
+      }
+
+      .reset-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #dc3545;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .reset-button:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="counter-container">
+        <button id="button1" class="button">Кнопка 1</button>
+        <span id="counter1" class="counter">0</span>
+      </div>
+
+      <div class="counter-container">
+        <button id="button2" class="button">Кнопка 2</button>
+        <span id="counter2" class="counter">0</span>
+      </div>
+
+      <button id="resetButton" class="reset-button">Скинути</button>
+    </div>
+
+    <script>
+      // Отримуємо лічильники зі сховища, або задаємо початкове значення
+      let count1 = localStorage.getItem("count1")
+        ? parseInt(localStorage.getItem("count1"))
+        : 0;
+      let count2 = localStorage.getItem("count2")
+        ? parseInt(localStorage.getItem("count2"))
+        : 0;
+
+      // Отримуємо елементи
+      const button1 = document.getElementById("button1");
+      const button2 = document.getElementById("button2");
+      const counter1 = document.getElementById("counter1");
+      const counter2 = document.getElementById("counter2");
+      const resetButton = document.getElementById("resetButton");
+
+      // Відображаємо початкові значення лічильників
+      counter1.textContent = count1;
+      counter2.textContent = count2;
+
+      // Обробник для кнопки 1
+      button1.addEventListener("click", () => {
+        count1++;
+        counter1.textContent = count1;
+        localStorage.setItem("count1", count1); // Зберігаємо в localStorage
+      });
+
+      // Обробник для кнопки 2
+      button2.addEventListener("click", () => {
+        count2++;
+        counter2.textContent = count2;
+        localStorage.setItem("count2", count2); // Зберігаємо в localStorage
+      });
+
+      // Обробник для кнопки скидання
+      resetButton.addEventListener("click", () => {
+        count1 = 0;
+        count2 = 0;
+        counter1.textContent = count1;
+        counter2.textContent = count2;
+        localStorage.setItem("count1", count1);
+        localStorage.setItem("count2", count2);
+      });
+    </script>
+  </body>
 </html>
